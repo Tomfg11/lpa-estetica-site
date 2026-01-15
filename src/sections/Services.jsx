@@ -19,15 +19,18 @@ const Services = () => {
           </h2>
         </div>
         
-        {/* Adicionei 'items-stretch' para os cards terem a mesma altura */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {content.services.map((service) => (
-            <div key={service.id} onClick={handleCardClick} className="cursor-pointer h-full">
-              <Card {...service} />
+            
+            <div key={service.id} className="h-full">
+              <Card 
+                {...service} 
+                onAction={handleAgendarClick} 
+              />
             </div>
           ))}
         </div>
-      </div>
+      </div>  
     </section>
   );
 };

@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 
-const Card = ({ title, description, images, items, actionLabel = "Agendar Agora" }) => {
+// 1. Recebemos 'onAction' aqui nas propriedades
+const Card = ({ title, description, images, items, actionLabel = "Agendar Agora", onAction }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = (e) => {
-    e.stopPropagation(); // Impede abrir o WhatsApp ao clicar na seta
+    // Não precisa mais de stopPropagation pois o card não tem clique geral,
+    // mas mal não faz manter.
+    e.stopPropagation(); 
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   const prevImage = (e) => {
-    e.stopPropagation(); // Impede abrir o WhatsApp ao clicar na seta
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden group relative">
+    // Removi 'group' e hovers de clique para não parecer um botão gigante, 
+    // mas mantive a sombra e o translate para ficar bonito.
+    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col h-full overflow-hidden relative">
       
       {/* ÁREA DA IMAGEM */}
-      <div className="h-48 w-full overflow-hidden relative bg-gray-100">
+      <div className="h-48 w-full overflow-hidden relative bg-gray-100 group"> 
+      {/* Adicionei 'group' aqui na imagem para as setas aparecerem só ao passar o mouse na FOTO (no desktop) */}
         
         <img 
           src={images[currentImageIndex]} 
@@ -30,12 +36,8 @@ const Card = ({ title, description, images, items, actionLabel = "Agendar Agora"
         {/* CONTROLES DO CARROSSEL */}
         {images.length > 1 && (
           <>
-            {/* Botão Esquerda (<) */}
             <button 
               onClick={prevImage}
-              // MUDANÇA AQUI: Adicionei 'opacity-100 md:opacity-0'
-              // Isso faz com que no celular (padrão) seja 100% visível, 
-              // e só no computador (md) ele comece invisível.
               className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-brand-primary rounded-full p-1.5 shadow-md backdrop-blur-sm transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100"
               title="Foto Anterior"
             >
@@ -44,10 +46,8 @@ const Card = ({ title, description, images, items, actionLabel = "Agendar Agora"
               </svg>
             </button>
 
-            {/* Botão Direita (>) */}
             <button 
               onClick={nextImage}
-              // MUDANÇA AQUI TAMBÉM
               className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-brand-primary rounded-full p-1.5 shadow-md backdrop-blur-sm transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100"
               title="Próxima Foto"
             >
@@ -56,7 +56,6 @@ const Card = ({ title, description, images, items, actionLabel = "Agendar Agora"
               </svg>
             </button>
 
-            {/* Indicadores (Bolinhas) */}
             <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
               {images.map((_, idx) => (
                 <div 
@@ -92,7 +91,11 @@ const Card = ({ title, description, images, items, actionLabel = "Agendar Agora"
           </div>
         )}
 
-        <button className="mt-auto text-brand-primary text-sm font-medium border-b border-brand-accent pb-1 hover:text-brand-accent transition-colors">
+        {/* 2. O CLIQUE AGORA É AQUI NO BOTÃO */}
+        <button 
+          onClick={onAction}
+          className="mt-auto text-brand-primary text-sm font-medium border-b border-brand-accent pb-1 hover:text-brand-accent transition-colors"
+        >
           {actionLabel}
         </button>
       </div>

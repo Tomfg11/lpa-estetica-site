@@ -4,10 +4,13 @@ import Card from '../components/ui/Card';
 
 const Services = () => {
   
-  const handleCardClick = () => {
+  // --- ESTA ERA A PARTE QUE ESTAVA FALTANDO ---
+  // Definimos a função aqui antes de usar lá embaixo
+  const handleAgendarClick = () => {
     const text = encodeURIComponent("Olá! Vi os serviços no site e gostaria de agendar.");
     window.open(`${content.global.whatsappLink}?text=${text}`, '_blank');
   };
+  // ---------------------------------------------
 
   return (
     <section id="servicos" className="py-24 bg-white">
@@ -21,8 +24,8 @@ const Services = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {content.services.map((service) => (
-            
             <div key={service.id} className="h-full">
+              {/* Agora ele vai encontrar a função handleAgendarClick criada acima */}
               <Card 
                 {...service} 
                 onAction={handleAgendarClick} 
@@ -30,7 +33,7 @@ const Services = () => {
             </div>
           ))}
         </div>
-      </div>  
+      </div>
     </section>
   );
 };

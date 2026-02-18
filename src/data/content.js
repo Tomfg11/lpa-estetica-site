@@ -2,6 +2,8 @@ import Sobrancelha1 from '../assets/Sobrancelha1.png';
 import Sobrancelha2 from '../assets/Sobrancelha2.png';
 import Cilios1 from '../assets/Cilios1.png';
 import Cilios2 from '../assets/Cilios2.png';
+import Cilios3 from '../assets/glamour.png';
+import Cilios4 from '../assets/foxeyes.png';
 import Depilacao1 from '../assets/Depilacao1.png';
 import Depilacao2 from '../assets/Depilacao2.png';
 
@@ -34,10 +36,30 @@ export const content = {
         Cilios2
       ],
       items: [
-        { name: "Volume Brasileiro", price: "R$ 100,00" },
-        { name: "Volume Glamour", price: "R$ 110,00" },
-        { name: "Volume Mega Glamour", price: "R$ 180,00" },
-        { name: "Manutenção", price: "a partir de R$ 80,00" }
+        { 
+          name: "Volume Brasileiro", 
+          price: "R$ 100,00",
+          image: Cilios2 
+        },
+        { 
+          name: "Volume Glamour", 
+          price: "R$ 110,00",
+          image: Cilios3 
+        },
+        { 
+          name: "Fox Eyes", 
+          price: "R$ 120,00",
+          image: Cilios4 
+        },
+        { 
+          name: "Volume Luxo", 
+          price: "R$ 130,00",
+          image: Cilios1 
+        },
+        { 
+          name: "Manutenção", 
+          price: "a partir de R$ 80,00",
+        },
       ],
       icon: "👁️"
     },
@@ -50,8 +72,16 @@ export const content = {
         Sobrancelha2  
       ],
       items: [
-        { name: "Design Simples", price: "R$ 30,00" },
-        { name: "Design com Henna", price: "R$ 40,00" },
+        { 
+          name: "Design Simples", 
+          price: "R$ 30,00",
+          image: Sobrancelha2
+        },
+        { 
+          name: "Design com Henna", 
+          price: "R$ 40,00",
+          image: Sobrancelha1
+        },
         { name: "Combo (Design + Buço)", price: "a partir de R$ 45,00" }
       ],
       icon: "✨"
@@ -61,7 +91,6 @@ export const content = {
       title: "Depilação Facial",
       description: "Depilação com cera quente e finalização relaxante com esfera de jade.",
       images: [
-        Depilacao1,
         Depilacao2
       ],
       items: [

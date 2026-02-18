@@ -58,7 +58,7 @@ export const content = {
         },
         { 
           name: "Manutenção", 
-          price: "a partir de R$ 80,00",
+          price: "a partir de R$ 80",
         },
       ],
       icon: "👁️"

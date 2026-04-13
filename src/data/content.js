@@ -59,7 +59,7 @@ export const content = {
         },
         { 
           name: "Volume Mega Brasileiro", 
-          price: "R$ 180,00",
+          price: "R$ 150,00",
           image: Cilios5 
         },
         { 

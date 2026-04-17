@@ -1,6 +1,7 @@
 import Sobrancelha1 from '../assets/Sobrancelha1.png';
 import Sobrancelha2 from '../assets/Sobrancelha2.png';
 import Cilios1 from '../assets/Cilios1.png';
+import VolumeBrasileiro from '../assets/VolumeBrasileiro.png';
 import Cilios2 from '../assets/Cilios2.png';
 import Cilios3 from '../assets/glamour.png';
 import Cilios4 from '../assets/foxeyes.png';
@@ -43,7 +44,7 @@ export const content = {
         { 
           name: "Volume Brasileiro", 
           price: "R$ 100,00",
-          image: Cilios2 
+          image: VolumeBrasileiro 
         },
         { 
           name: "Volume Egípcio", 

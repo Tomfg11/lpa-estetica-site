@@ -3,12 +3,10 @@ import Sobrancelha2 from '../assets/Sobrancelha2.png';
 import Cilios1 from '../assets/Cilios1.png';
 import VolumeBrasileiro from '../assets/VolumeBrasileiro.png';
 import Cilios2 from '../assets/Cilios2.png';
-import Cilios3 from '../assets/glamour.png';
 import Cilios4 from '../assets/foxeyes.png';
 import Cilios5 from '../assets/Cilios5.png';
 import VolumeEgipicio from '../assets/VolumeEgipicio.png';
 import VolumeGlamour1 from '../assets/VolumeGlamour1.png';
-import VolumeGlamour2 from '../assets/VolumeGlamour2.png';
 import Depilacao1 from '../assets/Depilacao1.png';
 import Depilacao2 from '../assets/Depilacao2.png';
 

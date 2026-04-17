@@ -5,6 +5,9 @@ import Cilios2 from '../assets/Cilios2.png';
 import Cilios3 from '../assets/glamour.png';
 import Cilios4 from '../assets/foxeyes.png';
 import Cilios5 from '../assets/Cilios5.png';
+import VolumeEgipicio from '../assets/VolumeEgipicio.png';
+import VolumeGlamour1 from '../assets/VolumeGlamour1.png';
+import VolumeGlamour2 from '../assets/VolumeGlamour2.png';
 import Depilacao1 from '../assets/Depilacao1.png';
 import Depilacao2 from '../assets/Depilacao2.png';
 
@@ -43,19 +46,19 @@ export const content = {
           image: Cilios2 
         },
         { 
+          name: "Volume Egípcio", 
+          price: "R$ 100,00",
+          image: VolumeEgipicio 
+        },
+        { 
           name: "Volume Glamour", 
           price: "R$ 110,00",
-          image: Cilios3 
+          image: VolumeGlamour1 
         },
         { 
           name: "Fox Eyes", 
           price: "R$ 120,00",
           image: Cilios4 
-        },
-        { 
-          name: "Volume Luxo", 
-          price: "R$ 130,00",
-          image: Cilios1 
         },
         { 
           name: "Volume Mega Brasileiro", 

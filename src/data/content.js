@@ -39,34 +39,34 @@ export const content = {
         Cilios2
       ],
       items: [
-        { 
-          name: "Volume Brasileiro", 
-          price: "R$ 100,00",
-          image: VolumeBrasileiro 
+        {
+          name: "Volume Brasileiro",
+          price: "R$ 115,00",
+          image: VolumeBrasileiro
         },
-        { 
-          name: "Volume Egípcio", 
-          price: "R$ 100,00",
-          image: VolumeEgipicio 
-        },
-        { 
-          name: "Volume Glamour", 
+        {
+          name: "Volume Egípcio",
           price: "R$ 110,00",
-          image: VolumeGlamour1 
+          image: VolumeEgipicio
         },
-        { 
-          name: "Fox Eyes", 
-          price: "R$ 120,00",
-          image: Cilios4 
+        {
+          name: "Volume Glamour",
+          price: "R$ 125,00",
+          image: VolumeGlamour1
         },
-        { 
-          name: "Volume Mega Brasileiro", 
-          price: "R$ 150,00",
-          image: Cilios5 
+        {
+          name: "Fox Eyes",
+          price: "R$ 140,00",
+          image: Cilios4
         },
-        { 
-          name: "Manutenção", 
-          price: "a partir de R$ 80",
+        {
+          name: "Volume Mega Brasileiro",
+          price: "R$ 160,00",
+          image: Cilios5
+        },
+        {
+          name: "Manutenção",
+          price: "a partir de R$ 85",
         },
       ],
       icon: "👁️"
@@ -77,17 +77,17 @@ export const content = {
       description: "Design personalizado baseado na harmonia do seu rosto, preservando fios naturais.",
       images: [
         Sobrancelha1,
-        Sobrancelha2  
+        Sobrancelha2
       ],
       items: [
-        { 
-          name: "Design Simples", 
-          price: "R$ 30,00",
+        {
+          name: "Design Simples",
+          price: "R$ 35,00",
           image: Sobrancelha2
         },
-        { 
-          name: "Design com Henna", 
-          price: "R$ 40,00",
+        {
+          name: "Design com Henna",
+          price: "R$ 45,00",
           image: Sobrancelha1
         },
         { name: "Combo (Design + Buço)", price: "a partir de R$ 45,00" }

@@ -1,27 +1,37 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
-import Hero from './sections/Hero';
-import Services from './sections/Services';
-import About from './sections/About';
-import Contact from './sections/Contact';
-import Socials from './sections/Socials'; 
+import LandingPage from './pages/LandingPage';
+import ClientLoginPage from './pages/ClientLoginPage';
+import ClientDashboard from './pages/ClientDashboard';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminDashboard from './pages/AdminDashboard';
+import ProtectedRoute from './components/guards/ProtectedRoute';
 
 function App() {
   return (
-    <div className="font-sans text-brand-text bg-white antialiased">
-      <Header />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Contact />
-        <Socials /> 
-      </main>
-      <Footer />
+    <>
       <Analytics />
-    </div>
+      <Routes>
+        {/* Landing Page original */}
+        <Route path="/" element={<LandingPage />} />
+
+        {/* Área da Cliente */}
+        <Route path="/fidelidade" element={<ClientLoginPage />} />
+        <Route path="/meu-cartao" element={<ClientDashboard />} />
+
+        {/* Área da Administradora */}
+        <Route path="/login-admin" element={<AdminLoginPage />} />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { content } from '../../data/content';
 import Button from '../ui/Button';
 import logo from '../../assets/logo-lpa.png';
@@ -39,7 +40,7 @@ const Header = () => {
       >
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
           
-          <a href="#home" className="flex items-center gap-3 group z-50 relative">
+          <Link to="/" className="flex items-center gap-3 group z-50 relative">
             <img 
               src={logo} 
               alt="LPA Estética Logo" 
@@ -53,7 +54,7 @@ const Header = () => {
                  Estética
                </span>
             </div>
-          </a>
+          </Link>
 
           <nav className="hidden md:flex gap-8 items-center">
             {content.nav.map((item) => (
@@ -65,6 +66,12 @@ const Header = () => {
                 {item.label}
               </a>
             ))}
+            <Link 
+              to="/fidelidade"
+              className="text-brand-accent hover:text-brand-primary font-medium transition-colors text-sm uppercase tracking-wide flex items-center gap-1"
+            >
+              💳 Fidelidade
+            </Link>
             {/* Botão Desktop usando a nova função */}
             <Button onClick={handleWhatsApp} className="text-sm px-6 py-2">
               Agendar
@@ -96,6 +103,14 @@ const Header = () => {
             {item.label}
           </a>
         ))}
+
+        <Link 
+          to="/fidelidade"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="text-brand-accent font-serif text-2xl font-bold hover:text-brand-primary transition-colors flex items-center gap-2"
+        >
+          💳 Fidelidade
+        </Link>
         
         <div className="mt-4">
           {/* Botão Mobile usando a nova função */}

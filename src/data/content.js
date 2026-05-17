@@ -7,7 +7,7 @@ import Cilios4 from '../assets/foxeyes.png';
 import Cilios5 from '../assets/Cilios5.png';
 import VolumeEgipicio from '../assets/VolumeEgipicio.png';
 import VolumeGlamour1 from '../assets/VolumeGlamour1.png';
-import Depilacao1 from '../assets/Depilacao1.png';
+import Browlamination from '../assets/browlamination.png';
 import Depilacao2 from '../assets/Depilacao2.png';
 
 export const content = {
@@ -40,14 +40,14 @@ export const content = {
       ],
       items: [
         {
-          name: "Volume Brasileiro",
-          price: "R$ 115,00",
-          image: VolumeBrasileiro
-        },
-        {
           name: "Volume Egípcio",
           price: "R$ 110,00",
           image: VolumeEgipicio
+        },
+        {
+          name: "Volume Brasileiro",
+          price: "R$ 115,00",
+          image: VolumeBrasileiro
         },
         {
           name: "Volume Glamour",
@@ -90,7 +90,12 @@ export const content = {
           price: "R$ 45,00",
           image: Sobrancelha1
         },
-        { name: "Combo (Design + Buço)", price: "a partir de R$ 45,00" }
+        {
+          name: "Browlamination",
+          price: "a partir de R$ 110,00",
+          image: Browlamination
+        },
+        { name: "Design + Buço", price: "a partir de R$ 45,00" }
       ],
       icon: "✨"
     },

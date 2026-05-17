@@ -59,7 +59,7 @@ const Card = ({ title, description, images, items, actionLabel = "Agendar Agora"
                 key={index}
                 // AÇÃO DE CLIQUE:
                 onClick={() => handleItemClick(item.image, index)}
-                className={`flex justify-between items-center text-sm p-3 rounded-lg cursor-pointer transition-all border ${
+                className={`flex flex-wrap justify-between items-center text-sm p-3 rounded-lg cursor-pointer transition-all border gap-x-2 gap-y-1 ${
                   selectedItemIndex === index 
                     ? 'bg-white border-brand-primary shadow-sm ring-1 ring-brand-primary/20' // Estilo Selecionado
                     : 'border-transparent hover:bg-white hover:border-gray-200' // Estilo Normal
@@ -67,7 +67,7 @@ const Card = ({ title, description, images, items, actionLabel = "Agendar Agora"
               >
                 <div className="text-left flex items-center gap-2">
                     {/* Ícone condicional: Mostra câmera se tiver foto, ou bolinha se não tiver */}
-                    <div className={`p-1.5 rounded-full ${selectedItemIndex === index ? 'bg-brand-primary text-white' : 'bg-gray-200 text-gray-500'}`}>
+                    <div className={`p-1.5 rounded-full shrink-0 ${selectedItemIndex === index ? 'bg-brand-primary text-white' : 'bg-gray-200 text-gray-500'}`}>
                       {item.image ? (
                         /* Ícone de Câmera */
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
@@ -81,12 +81,14 @@ const Card = ({ title, description, images, items, actionLabel = "Agendar Agora"
                     </div>
 
                     <div>
-                      <span className={`font-medium block ${selectedItemIndex === index ? 'text-brand-primary' : 'text-gray-700'}`}>
+                      <span className={`font-medium block break-words ${selectedItemIndex === index ? 'text-brand-primary' : 'text-gray-700'}`}>
                         {item.name}
                       </span>
                     </div>
                 </div>
-                <span className="text-brand-primary font-bold whitespace-nowrap ml-2">{item.price}</span>
+                <div className="flex-grow flex justify-end text-right ml-8 sm:ml-2">
+                  <span className="text-brand-primary font-bold">{item.price}</span>
+                </div>
               </div>
             ))}
           </div>

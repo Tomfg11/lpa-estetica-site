@@ -8,6 +8,7 @@ import Cilios5 from '../assets/Cilios5.png';
 import VolumeEgipicio from '../assets/VolumeEgipicio.png';
 import VolumeGlamour1 from '../assets/VolumeGlamour1.png';
 import Browlamination from '../assets/browlamination.png';
+import EfeitoRimel from '../assets/efeitorimel.png';
 import Depilacao2 from '../assets/Depilacao2.png';
 
 export const content = {
@@ -48,6 +49,11 @@ export const content = {
           name: "Volume Brasileiro",
           price: "R$ 115,00",
           image: VolumeBrasileiro
+        },
+        {
+          name: "Efeito Rímel",
+          price: "R$ 115,00",
+          image: EfeitoRimel
         },
         {
           name: "Volume Glamour",
@@ -95,7 +101,7 @@ export const content = {
           price: "a partir de R$ 110,00",
           image: Browlamination
         },
-        { name: "Design + Buço", price: "a partir de R$ 45,00" }
+        { name: "Design + Buço", price: "a partir de R$ 50,00" }
       ],
       icon: "✨"
     },

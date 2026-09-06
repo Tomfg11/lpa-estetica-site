@@ -17,11 +17,11 @@ service cloud.firestore {
 
       // CRIAÇÃO:
       // - Cliente pode criar seu próprio documento no primeiro login (via Phone Auth)
-      // - O role deve ser obrigatoriamente 'client'
-      allow create: if request.auth != null
-        && request.auth.uid == userId
-        && request.resource.data.role == 'client'
-        && request.resource.data.keys().hasAll(['uid', 'phoneNumber', 'name', 'role', 'points', 'createdAt']);
+      // - Admin pode cadastrar clientes manualmente
+      allow create: if request.auth != null && (
+        (request.auth.uid == userId && request.resource.data.role == 'client' && request.resource.data.keys().hasAll(['uid', 'phoneNumber', 'name', 'role', 'points', 'createdAt'])) ||
+        request.auth.token.email == 'leetpar@gmail.com'
+      );
 
       // ATUALIZAÇÃO:
       // - Somente a Admin pode atualizar documentos (adicionar pontos, resgatar, etc.)
@@ -53,6 +53,33 @@ service cloud.firestore {
         // Ninguém atualiza ou exclui histórico (auditoria imutável)
         allow update, delete: if false;
       }
+    }
+
+    // ============================================================
+    // COLEÇÃO: procedures (atendimentos e lembretes de retorno)
+    // ============================================================
+    match /procedures/{procedureId} {
+
+      // LEITURA:
+      // - Admin lê todos os procedimentos
+      // - Cliente pode ler os seus próprios procedimentos
+      allow read: if request.auth != null && (
+        request.auth.token.email == 'leetpar@gmail.com' ||
+        resource.data.clientId == request.auth.uid
+      );
+
+      // ESCRITA (Criação, Atualização, Exclusão):
+      // - Somente a Administradora gerencia procedimentos
+      allow create, update, delete: if request.auth != null
+        && request.auth.token.email == 'leetpar@gmail.com';
+    }
+
+    // ============================================================
+    // COLEÇÃO: expenses (despesas e custos do estúdio)
+    // ============================================================
+    match /expenses/{expenseId} {
+      allow read, create, update, delete: if request.auth != null
+        && request.auth.token.email == 'leetpar@gmail.com';
     }
   }
 }

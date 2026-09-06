@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import { useAuth } from '../hooks/useAuth';
 import useFidelityPoints from '../hooks/useFidelityPoints';
+import { getClientProcedures, toDateObject } from '../services/procedureService';
 import FidelityCard from '../components/ui/FidelityCard';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import logo from '../assets/logo-lpa.png';
 
 /**
- * ClientDashboard — Painel da cliente com cartão fidelidade e QR Code.
- * Design mobile-first: pensado para uso no celular.
+ * ClientDashboard — Painel da cliente com cartão fidelidade, QR Code e previsão de manutenção.
  */
 const ClientDashboard = () => {
   const navigate = useNavigate();
   const { user, userData, logout, loading: authLoading } = useAuth();
   const { points, maxPoints, loading: pointsLoading, isCardComplete } = useFidelityPoints(user?.uid);
+  const [latestProcedure, setLatestProcedure] = useState(null);
+
+  useEffect(() => {
+    if (user?.uid) {
+      getClientProcedures(user.uid)
+        .then((procs) => {
+          if (procs && procs.length > 0) {
+            setLatestProcedure(procs[0]);
+          }
+        })
+        .catch((err) => console.log('Histórico não disponível para visualização cliente:', err));
+    }
+  }, [user?.uid]);
 
   const handleLogout = async () => {
     await logout();
@@ -49,6 +62,13 @@ const ClientDashboard = () => {
     );
   }
 
+  const dueDateFormatted = latestProcedure
+    ? toDateObject(latestProcedure.dueDate).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+      })
+    : null;
+
   return (
     <div className="min-h-screen bg-hero-gradient flex flex-col">
       {/* Header */}
@@ -66,14 +86,13 @@ const ClientDashboard = () => {
       </div>
 
       {/* Conteúdo principal */}
-      <div className="flex-1 flex flex-col items-center px-5 py-6 gap-6 max-w-md mx-auto w-full">
-
+      <div className="flex-1 flex flex-col items-center px-5 py-6 gap-5 max-w-md mx-auto w-full">
         {/* Saudação */}
         <div className="text-center">
           <h1 className="font-serif text-xl sm:text-2xl text-brand-primary font-bold">
             Olá, {userData?.name || 'Cliente'}! 👋
           </h1>
-          <p className="text-brand-text text-sm mt-1">
+          <p className="text-brand-text text-xs mt-1">
             {userData?.phoneNumber || user?.phoneNumber}
           </p>
         </div>
@@ -81,7 +100,7 @@ const ClientDashboard = () => {
         {/* Cartão Fidelidade */}
         <FidelityCard currentPoints={points} maxPoints={maxPoints} />
 
-        {/* Mensagem de status */}
+        {/* Mensagem de status de pontos */}
         {isCardComplete ? (
           <div className="w-full bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-xl p-4 text-center">
             <p className="text-amber-800 font-bold text-sm">🎉 Parabéns!</p>
@@ -90,19 +109,45 @@ const ClientDashboard = () => {
             </p>
           </div>
         ) : (
-          <div className="w-full bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
+          <div className="w-full bg-white/60 backdrop-blur-sm rounded-xl p-3 text-center">
             <p className="text-brand-text text-xs leading-relaxed">
-              Falta{points === maxPoints - 1 ? '' : 'm'} <span className="font-bold text-brand-primary">{maxPoints - points}</span>{' '}
+              Falta{points === maxPoints - 1 ? '' : 'm'}{' '}
+              <span className="font-bold text-brand-primary">{maxPoints - points}</span>{' '}
               {maxPoints - points === 1 ? 'marcação' : 'marcações'} para completar seu cartão!
             </p>
           </div>
         )}
 
+        {/* Card de Lembrete / Previsão de Próxima Manutenção */}
+        {latestProcedure && dueDateFormatted && (
+          <div className="w-full bg-gradient-to-r from-brand-light to-brand-peach/40 border border-brand-accent/30 rounded-2xl p-4 shadow-sm text-left">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="text-base">✨</span>
+              <p className="text-brand-primary font-bold text-xs uppercase tracking-wider">
+                Próxima Manutenção Recomendada
+              </p>
+            </div>
+            <p className="text-brand-text text-xs leading-relaxed">
+              Para seu <strong>{latestProcedure.serviceName}</strong> continuar impecável, a data
+              sugerida de retorno é até <strong>{dueDateFormatted}</strong>.
+            </p>
+            <a
+              href={`https://wa.me/5521978890411?text=${encodeURIComponent(
+                `Olá Letícia! Gostaria de agendar a manutenção do meu ${latestProcedure.serviceName} 🥰`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center justify-center gap-1.5 w-full py-2.5 px-3 rounded-xl bg-brand-primary text-white text-xs font-bold shadow-md hover:bg-brand-secondary transition-all"
+            >
+              <span>💬</span>
+              <span>Agendar Manutenção pelo WhatsApp</span>
+            </a>
+          </div>
+        )}
+
         {/* QR Code */}
         <div className="w-full bg-white rounded-2xl shadow-lg shadow-brand-primary/5 p-6 flex flex-col items-center">
-          <h2 className="font-serif text-lg text-brand-primary font-bold mb-1">
-            Seu QR Code
-          </h2>
+          <h2 className="font-serif text-lg text-brand-primary font-bold mb-1">Seu QR Code</h2>
           <p className="text-brand-text text-xs mb-5 text-center">
             Apresente este código ao realizar um serviço
           </p>
@@ -126,7 +171,7 @@ const ClientDashboard = () => {
         {/* Link para voltar */}
         <Link
           to="/"
-          className="text-brand-text text-sm hover:text-brand-primary transition-colors py-3"
+          className="text-brand-text text-xs hover:text-brand-primary transition-colors py-2"
         >
           ← Voltar ao site
         </Link>

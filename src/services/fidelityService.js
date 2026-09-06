@@ -1,6 +1,7 @@
 import {
   doc,
   getDoc,
+  setDoc,
   updateDoc,
   addDoc,
   collection,
@@ -165,3 +166,40 @@ export const getAllClients = async () => {
  * @returns {number}
  */
 export const getMaxPoints = () => MAX_POINTS;
+
+/**
+ * Cria uma cliente manualmente no Firestore (pelo Admin).
+ * @param {Object} params
+ * @param {string} params.name - Nome da cliente
+ * @param {string} params.phoneNumber - Telefone/WhatsApp
+ * @param {string} params.adminId - UID da administradora
+ * @param {number} [params.initialPoints=0] - Pontos iniciais
+ * @returns {Promise<Object>} Cliente criado
+ */
+export const createClientManually = async ({ name, phoneNumber, adminId, initialPoints = 0 }) => {
+  if (!name || !phoneNumber) {
+    throw new Error('Nome e telefone são obrigatórios.');
+  }
+
+  // Limpa caracteres especiais do telefone para validação
+  const cleanPhone = phoneNumber.replace(/\D/g, '');
+  if (cleanPhone.length < 10) {
+    throw new Error('Telefone inválido. Informe DDD + número.');
+  }
+
+  const newDocRef = doc(collection(db, 'users'));
+  const clientData = {
+    uid: newDocRef.id,
+    name: name.trim(),
+    phoneNumber: phoneNumber.trim(),
+    role: 'client',
+    points: initialPoints,
+    createdAt: serverTimestamp(),
+    createdBy: adminId || 'admin',
+    registeredManually: true,
+  };
+
+  await setDoc(newDocRef, clientData);
+  return { id: newDocRef.id, ...clientData };
+};
+

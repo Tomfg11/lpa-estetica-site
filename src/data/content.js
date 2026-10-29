@@ -42,37 +42,37 @@ export const content = {
       items: [
         {
           name: "Volume Egípcio",
-          price: "R$ 110,00",
+          //price: "R$ 110,00",
           image: VolumeEgipicio
         },
         {
           name: "Volume Brasileiro",
-          price: "R$ 115,00",
+          //price: "R$ 115,00",
           image: VolumeBrasileiro
         },
         {
           name: "Efeito Rímel",
-          price: "R$ 115,00",
+          //price: "R$ 115,00",
           image: EfeitoRimel
         },
         {
           name: "Volume Glamour",
-          price: "R$ 125,00",
+          //price: "R$ 125,00",
           image: VolumeGlamour1
         },
         {
           name: "Fox Eyes",
-          price: "R$ 140,00",
+          //price: "R$ 140,00",
           image: Cilios4
         },
         {
           name: "Volume Mega Brasileiro",
-          price: "R$ 160,00",
+          //price: "R$ 160,00",
           image: Cilios5
         },
         {
           name: "Manutenção",
-          price: "a partir de R$ 85",
+          //price: "a partir de R$ 85",
         },
       ],
       icon: "👁️"
@@ -88,20 +88,20 @@ export const content = {
       items: [
         {
           name: "Design Simples",
-          price: "R$ 35,00",
+          //price: "R$ 35,00",
           image: Sobrancelha2
         },
         {
           name: "Design com Henna",
-          price: "R$ 45,00",
+          //price: "R$ 45,00",
           image: Sobrancelha1
         },
         {
           name: "Browlamination",
-          price: "a partir de R$ 110,00",
+          //price: "a partir de R$ 110,00",
           image: Browlamination
         },
-        { name: "Design + Buço", price: "a partir de R$ 50,00" }
+        { name: "Design + Buço", /*price: "a partir de R$ 50,00"*/ }
       ],
       icon: "✨"
     },
@@ -113,9 +113,9 @@ export const content = {
         Depilacao2
       ],
       items: [
-        { name: "Buço", price: "R$ 20,00" },
-        { name: "Buço + Queixo", price: "R$ 25,00" },
-        { name: "Rosto Completo", price: "R$ 35,00" }
+        { name: "Buço", /*price: "R$ 20,00"*/ },
+        { name: "Buço + Queixo", /*price: "R$ 25,00"*/ },
+        { name: "Rosto Completo", /*price: "R$ 35,00"*/ }
       ],
       icon: "💆‍♀️"
     }
